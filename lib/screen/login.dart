@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:diary/screen/homepage.dart';
+import 'package:diary/screen/signup.dart';
+
+import 'loading.dart'; // Import your SignUpScreen
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -41,9 +44,14 @@ class _LoginScreenState extends State<LoginScreen> {
       // Navigate to Homepage if successful
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => Homepage(),
+          builder: (context) => Load(), // Show the loading screen
         ),
       );
+
+      // Wait for the loading animation to complete
+      Future.delayed(Duration(seconds: 2), () {
+
+      });
     } on FirebaseAuthException catch (e) {
       String message;
 
@@ -66,11 +74,17 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
-    double keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
+    double height = MediaQuery
+        .of(context)
+        .size
+        .height;
+    double width = MediaQuery
+        .of(context)
+        .size
+        .width;
 
     return Scaffold(
+      resizeToAvoidBottomInset: true, // Ensure the layout resizes properly
       body: SafeArea(
         child: Container(
           height: height,
@@ -82,99 +96,126 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
           child: SingleChildScrollView(
-            reverse: true, // Ensures the view scrolls up when the keyboard appears
+            physics: const ClampingScrollPhysics(),
+            // Prevent unnecessary bouncing
             child: Padding(
-              padding: EdgeInsets.only(bottom: keyboardHeight),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const SizedBox(height: 65),
+                  const SizedBox(height: 50),
                   const Text(
-                    'Login',
-                    style: TextStyle(fontSize: 48, fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(height: 70),
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Form(
-                      key: formKey,
-                      child: Column(
-                        children: [
-                          TextFormField(
-                            controller: emailController,
-                            decoration: const InputDecoration(
-                              hintText: 'Enter your email',
-                              labelText: 'Email',
-                              prefixIcon: Icon(Icons.email),
-                              border: OutlineInputBorder(),
-                            ),
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Please enter your email';
-                              }
-                              if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
-                                return 'Please enter a valid email';
-                              }
-                              return null;
-                            },
-                          ),
-                          const SizedBox(height: 20),
-                          TextFormField(
-                            controller: passwordController,
-                            decoration: InputDecoration(
-                              hintText: 'Enter your password',
-                              labelText: 'Password',
-                              prefixIcon: const Icon(Icons.lock),
-                              suffixIcon: IconButton(
-                                icon: Icon(
-                                  _isPasswordVisible
-                                      ? Icons.visibility
-                                      : Icons.visibility_off,
-                                ),
-                                onPressed: () {
-                                  setState(() {
-                                    _isPasswordVisible = !_isPasswordVisible;
-                                  });
-                                },
-                              ),
-                              border: const OutlineInputBorder(),
-                            ),
-                            obscureText: !_isPasswordVisible,
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Please enter your password';
-                              }
-                              if (value.length < 5) {
-                                return 'Password must be at least 5 characters long';
-                              }
-                              return null;
-                            },
-                          ),
-                          const SizedBox(height: 20),
-                          Align(
-                            alignment: Alignment.centerRight,
-                            child: ElevatedButton(
-                              onPressed: () {
-                                if (formKey.currentState?.validate() ?? false) {
-                                  _loginUser();
-                                } else {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                      content: Text('Please provide correct credentials'),
-                                    ),
-                                  );
-                                }
-                              },
-                              style: ElevatedButton.styleFrom(
-                                minimumSize: Size(width * 0.9, 50),
-                              ),
-                              child: const Text('Login'),
-                            ),
-                          ),
-                        ],
-                      ),
+                    'Welcome Back',
+                    style: TextStyle(
+                      fontSize: 36,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
                     ),
                   ),
+                  const SizedBox(height: 10),
+                  const Text(
+                    'Please login to your account',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.white,
+                    ),
+                  ),
+                  const SizedBox(height: 200),
+                  Form(
+                    key: formKey,
+                    child: Column(
+                      children: [
+                        TextFormField(
+                          controller: emailController,
+                          decoration: const InputDecoration(
+                            hintText: 'Enter your email',
+                            labelText: 'Email',
+                            prefixIcon: Icon(Icons.email),
+                            border: OutlineInputBorder(),
+                          ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter your email';
+                            }
+                            if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(
+                                value)) {
+                              return 'Please enter a valid email';
+                            }
+                            return null;
+                          },
+                        ),
+                        const SizedBox(height: 20),
+                        TextFormField(
+                          controller: passwordController,
+                          decoration: InputDecoration(
+                            hintText: 'Enter your password',
+                            labelText: 'Password',
+                            prefixIcon: const Icon(Icons.lock),
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                _isPasswordVisible
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  _isPasswordVisible = !_isPasswordVisible;
+                                });
+                              },
+                            ),
+                            border: const OutlineInputBorder(),
+                          ),
+                          obscureText: !_isPasswordVisible,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter your password';
+                            }
+                            if (value.length < 5) {
+                              return 'Password must be at least 5 characters long';
+                            }
+                            return null;
+                          },
+                        ),
+                        const SizedBox(height: 30),
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              if (formKey.currentState?.validate() ?? false) {
+                                _loginUser();
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text(
+                                        'Please provide correct credentials'),
+                                  ),
+                                );
+                              }
+                            },
+                            style: ElevatedButton.styleFrom(
+                              minimumSize: Size(width * 0.9, 50),
+                            ),
+                            child: const Text('Login'),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => Signup(),
+                        ),
+                      );
+                    },
+                    child: const Text(
+                      "Don't have an account? Sign up",
+                      style: TextStyle(color: Colors.black87),
+                    ),
+                  ),
+                  const SizedBox(height: 20), // Reduce unnecessary padding
                 ],
               ),
             ),

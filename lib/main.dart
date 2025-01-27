@@ -1,7 +1,8 @@
+import 'package:diary/screen/homepage.dart';
+import 'package:diary/screen/login.dart'; // Correct the path based on your file structure
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart'; // Import Firebase core package
-
-import 'Home.dart'; // Correct the path based on your file structure
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart'; // Import Firebase Auth package
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -9,18 +10,40 @@ void main() async {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  var auth = FirebaseAuth.instance; // Firebase Authentication instance
+  var isLogin = false;
+  checkIfLogin()async{
+    auth.authStateChanges().listen((User? user){
+      if(user!=null&&mounted){
+        setState(() {
+          isLogin=true;
+        });
+      }
+    });
+  }
+ @override
+  void initState() {
+     checkIfLogin();
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'My Diary',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const Login(), // Set Login as the home page
+      home: isLogin?const Homepage() :const LoginScreen(), // Set Login as the home page
     );
   }
 }

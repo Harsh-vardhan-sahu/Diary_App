@@ -1,6 +1,8 @@
+import 'package:diary/screen/login.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'homepage.dart';
+import 'loading.dart';
 
 class Signup extends StatefulWidget {
   const Signup({super.key});
@@ -16,7 +18,6 @@ class _SignupState extends State<Signup> {
   late TextEditingController _confirmPasswordController;
   final FirebaseAuth _auth = FirebaseAuth.instance;
   bool _obscurePassword = true;
-  bool _isCheckingEmailVerified = false;
 
   @override
   void initState() {
@@ -41,88 +42,30 @@ class _SignupState extends State<Signup> {
     final String password = _passwordController.text.trim();
 
     try {
-      final UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
+      // Navigate to the loading screen
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => Load()),
+      );
+
+      // Simulate loading animation duration
+      await Future.delayed(const Duration(milliseconds: 2500));
+
+      // Register user with Firebase Auth
+      await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
-      final User? user = userCredential.user;
 
-      if (user != null && !user.emailVerified) {
-        await user.sendEmailVerification();
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Verification email sent. Please verify your email.')),
-        );
-
-        // Start polling for email verification
-        _startEmailVerificationCheck(user);
-      }
+      // Navigate to the homepage after successful registration
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => const Homepage()),
+      );
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('An error occurred: ${e.toString()}')),
       );
-    }
-  }
 
-  void _startEmailVerificationCheck(User user) {
-    if (_isCheckingEmailVerified) return;
-
-    setState(() {
-      _isCheckingEmailVerified = true;
-    });
-
-    Future.doWhile(() async {
-      await Future.delayed(const Duration(seconds: 3));
-      await user.reload(); // Reload user data to get updated verification status
-      if (user.emailVerified) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Email verified. Redirecting to homepage...')),
-        );
-
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const Homepage()),
-        );
-        return false; // Stop the loop
-      }
-      return true; // Continue checking
-    }).then((_) {
-      setState(() {
-        _isCheckingEmailVerified = false;
-      });
-    });
-  }
-
-  Future<void> _loginUser() async {
-    if (!_formKey.currentState!.validate()) return;
-
-    final String email = _emailController.text.trim();
-    final String password = _passwordController.text.trim();
-
-    try {
-      final UserCredential userCredential = await _auth.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-      final User? user = userCredential.user;
-
-      if (user != null) {
-        await user.reload(); // Reload user data
-        if (!user.emailVerified) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Please verify your email to log in.')),
-          );
-          await _auth.signOut();
-        } else {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => const Homepage()),
-          );
-        }
-      }
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Login failed: ${e.toString()}')),
-      );
+     
     }
   }
 
@@ -145,9 +88,11 @@ class _SignupState extends State<Signup> {
           child: Column(
             children: [
               const SizedBox(height: 55),
+
               const Text(
                 'Sign Up',
-                style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+
+                style: TextStyle(fontSize: 38, fontWeight: FontWeight.bold,color: Colors.white),
               ),
               const SizedBox(height: 20),
               Expanded(
@@ -232,8 +177,17 @@ class _SignupState extends State<Signup> {
                         ),
                         const SizedBox(height: 20),
                         TextButton(
-                          onPressed: _loginUser,
-                          child: const Text('Already have an account? Log In'),
+                          onPressed: () {
+                            Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                builder: (context) => LoginScreen(),
+                              ),
+                            );
+                          },
+                          child: const Text(
+                            'Already have an account? Log In',
+                            style: TextStyle(color: Colors.black87),
+                          ),
                         ),
                       ],
                     ),
