@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:diary/screen/homepage.dart';
 import 'package:diary/screen/signup.dart';
 
 import 'loading.dart'; // Import your SignUpScreen

@@ -1,0 +1,2 @@
+C:/Users/91700/AndroidStudioProjects/Diary_App/android/app/.cxx/Debug/44732j3v/x86_64/CMakeFiles/edit_cache.dir
+C:/Users/91700/AndroidStudioProjects/Diary_App/android/app/.cxx/Debug/44732j3v/x86_64/CMakeFiles/rebuild_cache.dir

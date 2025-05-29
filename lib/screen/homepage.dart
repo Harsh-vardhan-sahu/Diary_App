@@ -2,31 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'DayDetailPage.dart';
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
 import 'login.dart';
-
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
-
   @override
   State<Homepage> createState() => _HomepageState();
 }
-
 class _HomepageState extends State<Homepage> {
   String selectedYear = '2025';
-  final PageController _pageController = PageController(viewportFraction: 0.8);
+  late final PageController _pageController;
   final int currentDay = DateTime.now().day;
   final int currentMonth = DateTime.now().month;
   final Map<int, Set<int>> _highlightedDays = {}; // Month -> Set of days with entries
   late Stream<QuerySnapshot> _diaryStream;
   String? _userEmail; // For logged-in user's email
   late bool _isNightMode;
-
   @override
   void initState() {
     super.initState();
+    _pageController = PageController(
+      initialPage: currentMonth - 1,
+      viewportFraction: 0.8,
+    );
     _initializeUser();
     _updateTheme();
   }
@@ -137,22 +135,41 @@ class _HomepageState extends State<Homepage> {
                   ],
                 ),
               ),
-              DropdownButton<String>(
-                value: selectedYear,
-                dropdownColor: _isNightMode ? Colors.white : Colors.grey[850],
-                items: const [
-                  DropdownMenuItem(value: '2025', child: Text('2025')),
-                  DropdownMenuItem(value: '2024', child: Text('2024')),
-                  DropdownMenuItem(value: '2023', child: Text('2023')),
-                ],
-                onChanged: (value) {
-                  setState(() {
-                    selectedYear = value!;
-                    _initializeDiaryStream();
-                  });
-                },
+          DropdownButton<String>(
+            value: selectedYear,
+            dropdownColor: _isNightMode ? Colors.grey[850] : Colors.white,
+            items: [
+              DropdownMenuItem(
+                value: '2025',
+                child: Text(
+                  '2025',
+                  style: TextStyle(color: _isNightMode ? Colors.white : Colors.black),
+                ),
               ),
-              const SizedBox(height: 15.0),
+              DropdownMenuItem(
+                value: '2024',
+                child: Text(
+                  '2024',
+                  style: TextStyle(color: _isNightMode ? Colors.white : Colors.black),
+                ),
+              ),
+              DropdownMenuItem(
+                value: '2023',
+                child: Text(
+                  '2023',
+                  style: TextStyle(color: _isNightMode ? Colors.white : Colors.black),
+                ),
+              ),
+            ],
+            onChanged: (value) {
+              setState(() {
+                selectedYear = value!;
+                _initializeDiaryStream();
+              });
+            },
+          ),
+
+          const SizedBox(height: 15.0),
               Expanded(
                 child: Container(
                   decoration: BoxDecoration(

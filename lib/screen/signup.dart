@@ -51,21 +51,22 @@ class _SignupState extends State<Signup> {
       await Future.delayed(const Duration(milliseconds: 2500));
 
       // Register user with Firebase Auth
-      await _auth.createUserWithEmailAndPassword(
+      UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
+
+      print("User registered: ${userCredential.user?.email}");  // Debugging
 
       // Navigate to the homepage after successful registration
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => const Homepage()),
       );
     } catch (e) {
+      print("Registration failed: $e");  // Debugging
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('An error occurred: ${e.toString()}')),
       );
-
-     
     }
   }
 

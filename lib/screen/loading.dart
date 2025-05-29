@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-
-import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
-import 'homepage.dart'; // Import your Homepage screen
-
+import 'homepage.dart';
 class Load extends StatefulWidget {
   @override
   State<Load> createState() => _LoadState();
 }
-
 class _LoadState extends State<Load> {
   @override
   void initState() {
@@ -22,9 +17,7 @@ class _LoadState extends State<Load> {
         ),
       );
     });
-  }
-
-  @override
+  }@override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
