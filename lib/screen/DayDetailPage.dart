@@ -16,7 +16,7 @@ class _DayDetailPageState extends State<DayDetailPage> {
   final TextEditingController _controller = TextEditingController();
   bool _isLoading = true;
   String _lastSavedContent = '';
-
+  String? _savedTime;
   User? _currentUser;
 
   @override
@@ -52,6 +52,7 @@ class _DayDetailPageState extends State<DayDetailPage> {
         setState(() {
           _controller.text = snapshot.get('content');
           _lastSavedContent = snapshot.get('content');
+          _savedTime = snapshot.get('save_time');
         });
       }
     } catch (e) {
@@ -66,7 +67,7 @@ class _DayDetailPageState extends State<DayDetailPage> {
   /// Save or update the note in Firestore
   Future<void> _saveNote() async {
     if (_currentUser == null) return;
-
+    String saveTime = DateFormat('hh:mm a').format(DateTime.now());
     String content = _controller.text;
     if (content == _lastSavedContent) return;
 
@@ -82,6 +83,7 @@ class _DayDetailPageState extends State<DayDetailPage> {
         'date': formattedDate,
         'content': content,
         'timestamp': FieldValue.serverTimestamp(),
+        'save_time': saveTime,
       });
 
       setState(() {
@@ -132,6 +134,11 @@ class _DayDetailPageState extends State<DayDetailPage> {
                   .titleLarge
                   ?.copyWith(fontWeight: FontWeight.bold),
             ),
+            if (_savedTime != null)
+              Text(
+                'Saved at $_savedTime',
+                style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+              ),
             const SizedBox(height: 10),
             Expanded(
               child: Card(
