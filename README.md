@@ -23,17 +23,17 @@ A beautifully designed, time-sensitive **Flutter Diary App** that changes UI bet
 
 ### ☀️ Day Mode Splash & Auth
 
-| Splash Screen (Day) | Sign In Page | Sign Up Page |
-|---------------------|--------------|--------------|
-| ![Day Splash](https://github.com/Harsh-vardhan-sahu/Diary_App/blob/main/assets/showcase/day_mode_splashscreen.png?raw=true) | ![Sign In](https://github.com/Harsh-vardhan-sahu/Diary_App/blob/main/assets/showcase/Sign-in.png?raw=true) | ![Sign Up](https://github.com/Harsh-vardhan-sahu/Diary_App/blob/main/assets/showcase/Sign_up.png?raw=true) |
+|Sign In Page | Sign Up Page |  Entry Page  |
+|-------------|--------------|--------------|
+ ![Sign In](https://github.com/Harsh-vardhan-sahu/Diary_App/blob/main/assets/showcase/Sign-in.png?raw=true) | ![Sign Up](https://github.com/Harsh-vardhan-sahu/Diary_App/blob/main/assets/showcase/Sign_up.png?raw=true) | ![Diary Page](https://github.com/Harsh-vardhan-sahu/Diary_App/blob/main/assets/showcase/Diarypage.png?raw=true) |
 
 ---
 
 ### 🌤️ Day Mode Diary Screens
 
-| Diary Page (Day) | Entry Page |
-|------------------|------------|
-| ![Diary Day](https://github.com/Harsh-vardhan-sahu/Diary_App/blob/main/assets/showcase/daymodediary.png?raw=true) | ![Diary Page](https://github.com/Harsh-vardhan-sahu/Diary_App/blob/main/assets/showcase/Diarypage.png?raw=true) |
+| Splash Screen (Day) | Diary Page (Day) | 
+|---------------------|------------------|
+ | ![Day Splash](https://github.com/Harsh-vardhan-sahu/Diary_App/blob/main/assets/showcase/day_mode_splashscreen.png?raw=true) |![Diary Day](https://github.com/Harsh-vardhan-sahu/Diary_App/blob/main/assets/showcase/daymodediary.png?raw=true) |
 
 ---
 
