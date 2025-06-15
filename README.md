@@ -2,28 +2,46 @@
   <img src="https://github.com/Harsh-vardhan-sahu/Diary_App/blob/main/assets/images/icons.png?raw=true" width="120" height="120" alt="App Icon" />
 </p>
 
-<h1 align="center">Diary App</h1>
+<h1 align="center"> Diary App</h1>
 
-A beautiful and simple **daily diary app** built using **Flutter (Dart)**. It lets users write, edit, and reflect on their day securely — with a **time-sensitive UI** (Morning vs Evening) and a **Lottie animated loader** for a smooth user experience.
+A beautifully designed, time-sensitive **Flutter Diary App** that changes UI between **Day & Night**, supports secure **Firebase Authentication**, and stores diary entries in **Firestore**. Includes smooth **Lottie animations** and a calming user experience.
 
 ---
 
 ## 🎯 Features
 
-- ✅ **Time-Based UI**: Different themes and GIFs in Morning and Evening
-- ✅ **Firebase Authentication** (Sign Up / Login)
-- ✅ **Secure, Cloud-Based Diary Entries** using Firestore
-- ✅ **Lottie Loader Page** during app start
-- ✅ **Clean and Calm UI** focused on writing
-- ✅ **Edit / Delete / Auto Timestamped Entries**
+- 🔐 **Firebase Auth** (Sign In / Sign Up)
+- 🕰️ **Time-Based UI** (Day/Night Mode)
+- ☁️ **Cloud Firestore** Storage
+- 🎨 Smooth UI with **GIF backgrounds**
+- 🎬 **Lottie-based splash screen**
+- 📝 Create, view, and manage diary entries
 
 ---
 
-## 📸 App Showcase
+## 📸 App Walkthrough
 
-| Loader | Morning UI | Writing Screen | Entry Display | Evening UI |
-|--------|------------|----------------|---------------|-------------|
-| ![Loader](https://github.com/Harsh-vardhan-sahu/Diary_App/blob/main/assets/showcase/loading.png?raw=true) | ![img](https://github.com/Harsh-vardhan-sahu/Diary_App/blob/main/assets/showcase/img.png?raw=true) | ![img_1](https://github.com/Harsh-vardhan-sahu/Diary_App/blob/main/assets/showcase/img_1.png?raw=true) | ![img_3](https://github.com/Harsh-vardhan-sahu/Diary_App/blob/main/assets/showcase/img_3.png?raw=true) | ![img_4](https://github.com/Harsh-vardhan-sahu/Diary_App/blob/main/assets/showcase/img_4.png?raw=true) |
+### ☀️ Day Mode Splash & Auth
+
+| Splash Screen (Day) | Sign In Page | Sign Up Page |
+|---------------------|--------------|--------------|
+| ![Day Splash](https://github.com/Harsh-vardhan-sahu/Diary_App/blob/main/assets/showcase/day_mode_splashscreen.png?raw=true) | ![Sign In](https://github.com/Harsh-vardhan-sahu/Diary_App/blob/main/assets/showcase/Sign-in.png?raw=true) | ![Sign Up](https://github.com/Harsh-vardhan-sahu/Diary_App/blob/main/assets/showcase/Sign_up.png?raw=true) |
+
+---
+
+### 🌤️ Day Mode Diary Screens
+
+| Diary Page (Day) | Entry Page |
+|------------------|------------|
+| ![Diary Day](https://github.com/Harsh-vardhan-sahu/Diary_App/blob/main/assets/showcase/daymodediary.png?raw=true) | ![Diary Page](https://github.com/Harsh-vardhan-sahu/Diary_App/blob/main/assets/showcase/Diarypage.png?raw=true) |
+
+---
+
+### 🌙 Night Mode Experience
+
+| Splash Screen (Night) | Diary Page (Night) |
+|------------------------|--------------------|
+| ![Night Splash](https://github.com/Harsh-vardhan-sahu/Diary_App/blob/main/assets/showcase/night_mode_splashscreen.png?raw=true) | ![Diary Night](https://github.com/Harsh-vardhan-sahu/Diary_App/blob/main/assets/showcase/nightmodediary.png?raw=true) |
 
 ---
 
@@ -36,7 +54,7 @@ A beautiful and simple **daily diary app** built using **Flutter (Dart)**. It le
 | Backend      | Firebase Firestore       |
 | Auth         | Firebase Auth            |
 | Animations   | Lottie (flutter_lottie)  |
-| Theme        | Time-based (GIF background) |
+| Theme        | Time-based (Day/Night)   |
 
 ---
 
@@ -46,3 +64,4 @@ A beautiful and simple **daily diary app** built using **Flutter (Dart)**. It le
 - Flutter SDK
 - Firebase account
 - Android Studio / VS Code
+
