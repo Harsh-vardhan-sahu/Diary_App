@@ -137,7 +137,7 @@ class _splash extends State<splash>
             bottom: 30,
             right: 20,
             child: Text(
-              'By Harsh Vardhan Sahu',
+              'By- Harsh Vardhan Sahu',
               style: TextStyle(
                 fontSize: 13,
                 fontWeight: FontWeight.bold,
