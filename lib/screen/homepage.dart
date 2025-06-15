@@ -354,15 +354,18 @@ class _HomepageState extends State<Homepage> {
                         : Colors.blueGrey.shade50.withOpacity(0.8),
                     borderRadius: BorderRadius.circular(10.0),
                   ),
-                  child: const Text(
-                    '“Every day is a fresh start!”',
+                  child:  Text(
+                    _isNightMode?
+                        '“After hard work, the quiet of night is a gift.”'
+                        :'"Every day is a fresh start"',
                     style: TextStyle(
                       fontSize: 14.0,
                       fontStyle: FontStyle.italic,
-                      color: Colors.black54,
+                      color: _isNightMode? Colors.white70:Colors.black54,
                     ),
                     textAlign: TextAlign.center,
                   ),
+
                 ),
               ],
             ),
