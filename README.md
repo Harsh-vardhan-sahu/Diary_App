@@ -1,4 +1,8 @@
-# Diary_App
+<p align="center">
+  <img src="https://github.com/Harsh-vardhan-sahu/Diary_App/blob/main/assets/images/icons.png?raw=true" width="120" height="120" alt="App Icon" />
+</p>
+
+<h1 align="center">🌞🌙 Daily Diary App</h1>
 
 A beautiful and simple **daily diary app** built using **Flutter (Dart)**. It lets users write, edit, and reflect on their day securely — with a **time-sensitive UI** (Morning vs Evening) and a **Lottie animated loader** for a smooth user experience.
 
