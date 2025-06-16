@@ -43,6 +43,7 @@ dev_dependencies:
   firebase_core: ^3.9.0
   firebase_auth: ^5.3.4
   flutter_bloc: ^8.1.6
+  firebase_core_web: ^2.23.0
   cloud_firestore: ^5.6.0
   intl: ^0.18.0
   lottie: ^3.1.2
