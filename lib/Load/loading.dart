@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'homepage.dart';
+import '../screen/homepage.dart';
 class Load extends StatefulWidget {
   @override
   State<Load> createState() => _LoadState();
