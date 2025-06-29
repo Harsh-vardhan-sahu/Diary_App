@@ -1,0 +1,7 @@
+-keep class com.google.firebase.** { *; }
+-keep class com.google.android.gms.** { *; }
+-dontwarn com.google.firebase.**
+-dontwarn com.google.android.gms.**
+-keepattributes *Annotation*,Signature,InnerClasses,EnclosingMethod
+-keep class io.flutter.plugins.firebase.** { *; }
+-dontwarn io.flutter.plugins.firebase.**
