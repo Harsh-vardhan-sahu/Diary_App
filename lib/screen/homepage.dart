@@ -79,13 +79,13 @@ class _HomepageState extends State<Homepage> {
 
     String newMode = 'night';
 
-    if (hour < 12) {
+    if (hour < 12 && hour > 5) {
       newMode = 'morning';
-    } else if (hour < 16) {
+    } else if (hour < 16 && hour > 12) {
       newMode = 'noon';
     } else if (hour < 17 || (hour == 17 && minute < 30)) {
       newMode = 'lateNoon';
-    } else if (hour < 19) {
+    } else if (hour < 19 && hour > 17) {
       newMode = 'evening';
     }
 
